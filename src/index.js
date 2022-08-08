@@ -23,19 +23,20 @@ function onSearch(e) {
     return;
   }
   wrapperEl.innerHTML = '';
-  renderContains(searchQueryValue, page);
+  renderContainer(searchQueryValue, page);
 }
 
 function onLoadMore() {
   page += 1;
-  renderContains(searchQueryValue, page);
+  renderContainer(searchQueryValue, page);
 }
 
-async function renderContains(value, page) {
+async function renderContainer(value, page) {
   const { hits, totalHits } = await fetchImages(value, page);
   checkTotalPages(totalHits);
 
   try {
+    wrapperEl.insertAdjacentHTML('beforeend', generateContentList(hits));
     if (totalHits === 0) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -50,7 +51,6 @@ async function renderContains(value, page) {
     } else if (page === 1) {
       Notify.info(`Hooray! We found ${totalHits} images.`);
     }
-    wrapperEl.insertAdjacentHTML('beforeend', generateContentList(hits));
   } catch (error) {
     console.log(error);
   }
