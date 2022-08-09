@@ -2,7 +2,7 @@ function createList(acc, imageCard) {
   return (
     acc +
     `<div class="photo-card">
-  <img src="${imageCard.webformatURL}" alt="${imageCard.tags}" loading="lazy" class="img"/>
+  <a href="${imageCard.largeImageURL}"><img src="${imageCard.webformatURL}" alt="${imageCard.tags}" class="img"/></a>
   <div class="info">
     <p class="info-item">
       <b>Likes</b>

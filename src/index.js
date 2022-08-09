@@ -2,6 +2,14 @@ import './css/style.css';
 import fetchImages from './js/serviceApi';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { generateContentList } from './js/markupList';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
 
 let page;
 let totalPage;
@@ -34,9 +42,9 @@ function onLoadMore() {
 async function renderContainer(value, page) {
   const { hits, totalHits } = await fetchImages(value, page);
   checkTotalPages(totalHits);
-
   try {
     wrapperEl.insertAdjacentHTML('beforeend', generateContentList(hits));
+    lightbox.refresh();
     if (totalHits === 0) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
