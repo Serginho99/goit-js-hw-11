@@ -24,12 +24,12 @@ formEl.addEventListener('submit', onSearch);
 
 function onSearch(e) {
   e.preventDefault();
-  page = 1;
-  loadMoreBtnEl.style.display = 'block';
   searchQueryValue = e.currentTarget.elements.searchQuery.value.trim();
   if (!searchQueryValue) {
     return;
   }
+  page = 1;
+  loadMoreBtnEl.style.display = 'block';
   wrapperEl.innerHTML = '';
   renderContainer(searchQueryValue, page);
 }
@@ -67,3 +67,14 @@ async function renderContainer(value, page) {
 function checkTotalPages(totalHits) {
   totalPage = Math.ceil(totalHits / 40);
 }
+
+const { height: cardHeight } = document
+  .querySelector('.gallery')
+  .firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: 'smooth',
+});
+
+window.addEventListener('scroll');

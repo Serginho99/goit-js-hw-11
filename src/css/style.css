@@ -15,6 +15,7 @@
   height: 35px;
   cursor: pointer;
   transition: 250ms;
+  margin-bottom: 40px;
 }
 
 .load-more:hover {
@@ -49,6 +50,11 @@ input[name='searchQuery'] {
 .img {
   height: 200px;
   width: 300px;
+  transition: transform 250ms ease-out;
+}
+
+.img:hover {
+  transform: scale(1.05);
 }
 
 .photo-card {
