@@ -42,6 +42,7 @@ function onLoadMore() {
 async function renderContainer(value, page) {
   const { hits, totalHits } = await fetchImages(value, page);
   checkTotalPages(totalHits);
+  addEventListener('scroll', scroll);
   try {
     wrapperEl.insertAdjacentHTML('beforeend', generateContentList(hits));
     lightbox.refresh();
@@ -68,13 +69,25 @@ function checkTotalPages(totalHits) {
   totalPage = Math.ceil(totalHits / 40);
 }
 
-const { height: cardHeight } = document
-  .querySelector('.gallery')
-  .firstElementChild.getBoundingClientRect();
+function scroll() {
+  const wrapperList = document.querySelector('.gallery');
 
-window.scrollBy({
-  top: cardHeight * 2,
-  behavior: 'smooth',
-});
+  const contentHeight = wrapperList.offsetHeight;
+  const yOffset = window.pageYOffset;
+  const intViewportHeight = window.innerHeight;
+  const yEl = yOffset + intViewportHeight;
 
-window.addEventListener('scroll');
+  if (yEl >= contentHeight) {
+    page += 1;
+
+    removeEventListener('scroll', scroll);
+
+    // if (page > totalPage) {
+    //   Notify.warning(
+    //     "We're sorry, but you've reached the end of search results."
+    //   );
+    //   return;
+    // }
+    renderContainer(searchQueryValue, page);
+  }
+}

@@ -2,7 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-image: linear-gradient(#fff, rgba(255, 255, 255, 0.7));
+  z-index: 1;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.15));
 }
 
 .load-more {
@@ -29,22 +37,31 @@ button[type='submit'] {
   border-color: transparent;
   cursor: pointer;
   transition: 250ms;
+  height: 40px;
+  width: 100px;
+  background-color: #3ea8ff;
+  color: aliceblue;
 }
 
 button[type='submit']:hover {
-  color: aliceblue;
-  background-color: blue;
+  color: #212121;
+  background-color: #9e71e7;
 }
 
 input[name='searchQuery'] {
   padding-left: 7px;
+  height: 40px;
+  outline: none;
+  border: 1px solid #3ea8ff;
+  border-radius: 4px;
+  width: 250px;
 }
 
 .gallery {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding-top: 30px;
+  padding-top: 80px;
 }
 
 .img {
