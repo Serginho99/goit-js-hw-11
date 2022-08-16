@@ -70,9 +70,7 @@ function checkTotalPages(totalHits) {
 }
 
 function scroll() {
-  const wrapperList = document.querySelector('.gallery');
-
-  const contentHeight = wrapperList.offsetHeight;
+  const contentHeight = wrapperEl.offsetHeight - 500;
   const yOffset = window.pageYOffset;
   const intViewportHeight = window.innerHeight;
   const yEl = yOffset + intViewportHeight;
@@ -80,14 +78,14 @@ function scroll() {
   if (yEl >= contentHeight) {
     page += 1;
 
-    removeEventListener('scroll', scroll);
-
-    // if (page > totalPage) {
+    // if (page >= totalPage) {
     //   Notify.warning(
     //     "We're sorry, but you've reached the end of search results."
     //   );
     //   return;
     // }
+
+    removeEventListener('scroll', scroll);
     renderContainer(searchQueryValue, page);
   }
 }
